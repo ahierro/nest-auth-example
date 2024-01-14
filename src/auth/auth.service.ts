@@ -1,38 +1,51 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from './types/User';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-
-  testUser: User;
+  testUsers: User[];
+  saltRounds = 10;
 
   constructor(private jwtService: JwtService) {
-    this.testUser = {
-      id: 1,
-      name: 'ale',
-      password: 'test'
-    };
+    this.testUsers = [];
   }
 
-  validateUser(userName: string, password: string): any {
-    console.log(`AuthService#validateUser userName: ${userName} password: ${password} `)
-
-    if (userName === this.testUser.name && password === this.testUser.password) {
-      return {
-        id: this.testUser?.id,
-        name: this.testUser?.name
-      };
+  async validateUser(userName: string, password: string): Promise<any> {
+    console.log(`AuthService#validateUser userName: ${userName} password: ${password} `);
+    let user = null;
+    for (const testUser of this.testUsers) {
+      if (userName === testUser.name) {
+        const isValidPass = await bcrypt.compare(password, testUser.password);
+        console.log(testUser,isValidPass);
+        if(isValidPass){
+          user = testUser;
+          break;
+        }
+      }
     }
-    return null;
+    if (user) {
+      console.log("User Found:", user);
+      return {
+        id: user?.id,
+        name: user?.name
+      };
+    } else {
+      console.log("User Not Found");
+      return null;
+    }
   }
 
-  register(user: User){
-    this.testUser = user;
-    console.log("this.testUser",this.testUser);
+  async register(user: User) {
+    user.id = (this.testUsers.at(-1)?.id || 0) + 1;
+    console.log("bcrypt", bcrypt);
+    user.password = await bcrypt.hash(user.password, this.saltRounds);
+    this.testUsers.push(user);
+    console.log("this.testUsers", this.testUsers);
   }
 
-  login(user: User){
+  login(user: User) {
     const payload = {
       username: user.name,
       sub: user.id

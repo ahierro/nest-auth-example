@@ -7,6 +7,7 @@ npm install @nestjs/passport passport passport-local
 npm install @nestjs/jwt passport-jwt
 npm install @types/passport-local @types/passport-jwt --save-dev
 npm install bcrypt
+npm install --save @types/bcrypt
 
 ## Installation
 
