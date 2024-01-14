@@ -42,7 +42,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZSIsInN1YiI6MSwiaWF0IjoxNzA1MjY3MDA3LCJleHAiOjE3MDUyNjcwMDh9.llX-Lxq009nUX4JKeeNuFWKZYDPW4Tklxroji5qm7h4",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZSIsInN1YiI6MSwiaWF0IjoxNzA1MjcyMjA1LCJleHAiOjE3MDUzNTg2MDV9.iG-NB1bwT0n9RSMhUDAgxjKrH7vYW_F0aEbsXRZswG8",
 							"type": "string"
 						}
 					]
@@ -70,7 +70,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"ale2\",\r\n    \"password\": \"test2\"\r\n}",
+					"raw": "{\r\n    \"name\": \"ale\",\r\n    \"password\": \"test\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
